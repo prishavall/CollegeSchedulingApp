@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         tasksAdapter = new ToDoAdapter(this);
         tasksRecyclerView.setAdapter(tasksAdapter);
         ToDoModel task = new ToDoModel();
-        task.setTask("This is a Test Task");
+        task.setTask("This is a Tests Task");
         task.setStatus(0);
         task.setId(1);
         taskList.add(task);
