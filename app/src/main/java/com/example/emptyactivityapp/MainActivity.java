@@ -1,23 +1,13 @@
 package com.example.emptyactivityapp;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.app.AppCompatActivity; import androidx.recyclerview.widget.LinearLayoutManager; import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 
-import com.example.emptyactivityapp.Adapter.ToDoAdapter;
-import com.example.emptyactivityapp.Model.ToDoModel;
+import com.example.emptyactivityapp.Adapter.ToDoAdapter; import com.example.emptyactivityapp.Model.ToDoModel;
+import java.util.ArrayList; import java.util.List; import java.util.Objects;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-
-public class MainActivity extends AppCompatActivity {
-    private RecyclerView tasksRecyclerView;
-    private ToDoAdapter tasksAdapter;
-    private List<ToDoModel> taskList;
-
+public class MainActivity extends AppCompatActivity { private RecyclerView tasksRecyclerView; private ToDoAdapter tasksAdapter; private List<ToDoModel> taskList;
 
 
     @Override
