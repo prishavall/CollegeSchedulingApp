@@ -23,7 +23,7 @@ public class DataBaseHandler extends SQLiteOpenHelper
     private static final String STATUS= "status";
     private static final String CREATE_TODO_TABLE="CREATE TABLE "+ TODO_TABLE+" ( "+ID+
             " INTEGER PRIMARY KEY AUTOINCREMENT, "
-            + TASK +" TEXT, "+STATUS+ //<<<<<<<<<< ADDED a space before TEXT
+            + TASK +" TEXT, "+STATUS+
             " INTEGER)";
     private SQLiteDatabase db;
 
@@ -85,7 +85,7 @@ public class DataBaseHandler extends SQLiteOpenHelper
     public void updateTask(int id, String task) {
         ContentValues cv = new ContentValues();
         cv.put(TASK, task);
-        db.update(TODO_TABLE, cv, ID = "+?", new String[] {String.valueOf(ID)});
+        db.update(TODO_TABLE, cv, "id" + "+?", new String[] {String.valueOf(ID)});
 
     }
     public void deleteTAsk(int id) {
