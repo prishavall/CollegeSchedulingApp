@@ -1,29 +1,20 @@
 package com.example.emptyactivityapp;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.app.AppCompatActivity; import androidx.recyclerview.widget.LinearLayoutManager; import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 
-import com.example.emptyactivityapp.Adapter.ToDoAdapter;
-import com.example.emptyactivityapp.Model.ToDoModel;
+import com.example.emptyactivityapp.Adapter.ToDoAdapter; import com.example.emptyactivityapp.Model.ToDoModel;
+import java.util.ArrayList; import java.util.List; import java.util.Objects;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class MainActivity extends AppCompatActivity {
-    private RecyclerView tasksRecyclerView;
-    private ToDoAdapter tasksAdapter;
-    private List<ToDoModel> taskList;
-
+public class MainActivity extends AppCompatActivity { private RecyclerView tasksRecyclerView; private ToDoAdapter tasksAdapter; private List<ToDoModel> taskList;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        getSupportActionBar().hide();
+        Objects.requireNonNull(getSupportActionBar()).hide();
         taskList = new ArrayList<>();
         tasksRecyclerView = findViewById(R.id.tasksRecyclerView);
         tasksRecyclerView.setLayoutManager(new LinearLayoutManager(this));
