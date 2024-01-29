@@ -70,11 +70,19 @@ public class MainActivity extends AppCompatActivity implements DialogCloseListen
 //>>>>>>> fc1449a (Fixed nullpointer exceptions)
         db = new DataBaseHandler(this);
         db.openDatabase();
+//<<<<<<< HEAD
 //=======
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
 //>>>>>>> fc1449ad6c8a5b23df84e390b5e0cad457535c1c
+//=======
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
+
+//>>>>>>> 61c5900 (Fixed nullpointer exceptions)
         taskList = new ArrayList<>();
         tasksRecyclerView = findViewById(R.id.tasksRecyclerView);
         tasksRecyclerView.setLayoutManager(new LinearLayoutManager(this));
