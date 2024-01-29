@@ -32,11 +32,11 @@ public class MainActivity extends AppCompatActivity { private RecyclerView tasks
                     return true;
                 } else if (itemId == R.id.todolist) {
                     return true;
-                } else if (itemId == R.id.assignentsText) {
+                } else if (itemId == R.id.assignments) {
                     startActivity(new Intent(getApplicationContext(), Assignments.class));
                     overridePendingTransition(0, 0);
                     return true;
-                } else if (itemId == R.id.examsText) {
+                } else if (itemId == R.id.exams) {
                     startActivity(new Intent(getApplicationContext(), MiddlePage2.class));
                     overridePendingTransition(0, 0);
                     return true;
