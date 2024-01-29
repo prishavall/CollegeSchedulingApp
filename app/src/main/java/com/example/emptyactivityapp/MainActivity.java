@@ -72,12 +72,6 @@ public class MainActivity extends AppCompatActivity implements DialogCloseListen
         db.openDatabase();
 
 
-
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().hide();
-        }
-
-
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
@@ -88,7 +82,13 @@ public class MainActivity extends AppCompatActivity implements DialogCloseListen
             getSupportActionBar().hide();
         }
 
-//>>>>>>> 61c5900 (Fixed nullpointer exceptions)
+
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
+
+
         taskList = new ArrayList<>();
         tasksRecyclerView = findViewById(R.id.tasksRecyclerView);
         tasksRecyclerView.setLayoutManager(new LinearLayoutManager(this));
