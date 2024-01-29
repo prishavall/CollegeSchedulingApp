@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/todolist"
+        android:title= "Todo List"
+        android:icon="@drawable/ic_checkboard" />
+
+
+    <item
+        android:id="@+id/assignments"
+        android:title= "Assignments"
+        android:icon="@drawable/ic_assignments" />
+
+    <item
+        android:id="@+id/exams"
+        android:title= "Exams"
+        android:icon="@drawable/ic_exams" />
+
+    <item
+        android:id="@+id/simpleschedule"
+        android:title= "Schedule"
+        android:icon="@drawable/ic_activitybox" />
+
+
+
+
+</menu>
