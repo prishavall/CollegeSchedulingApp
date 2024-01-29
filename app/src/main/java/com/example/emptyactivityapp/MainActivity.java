@@ -10,7 +10,14 @@ import android.view.MenuItem;
 import com.example.emptyactivityapp.Adapter.ToDoAdapter; import com.example.emptyactivityapp.Model.ToDoModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+//<<<<<<< HEAD
 import java.util.ArrayList; import java.util.List; import java.util.Objects;
+//=======
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
+
 
 public class MainActivity extends AppCompatActivity { private RecyclerView tasksRecyclerView; private ToDoAdapter tasksAdapter; private List<ToDoModel> taskList;
 
@@ -19,6 +26,7 @@ public class MainActivity extends AppCompatActivity { private RecyclerView tasks
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+//<<<<<<< HEAD
         Objects.requireNonNull(getSupportActionBar()).hide();
         bottomNavigationView = findViewById(R.id.bottom_navigator);
         bottomNavigationView.setSelectedItemId(R.id.todolist);
@@ -44,6 +52,11 @@ public class MainActivity extends AppCompatActivity { private RecyclerView tasks
                 return false;
             }
         });
+//=======
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
+//>>>>>>> fc1449a (Fixed nullpointer exceptions)
         taskList = new ArrayList<>();
         tasksRecyclerView = findViewById(R.id.tasksRecyclerView);
         tasksRecyclerView.setLayoutManager(new LinearLayoutManager(this));
