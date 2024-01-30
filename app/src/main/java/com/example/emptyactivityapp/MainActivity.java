@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements DialogCloseListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 //<<<<<<< HEAD
+//<<<<<<< HEAD
         Objects.requireNonNull(getSupportActionBar()).hide();
         bottomNavigationView = findViewById(R.id.bottom_navigator);
         bottomNavigationView.setSelectedItemId(R.id.todolist);
@@ -71,6 +72,11 @@ public class MainActivity extends AppCompatActivity implements DialogCloseListen
 //>>>>>>> fc1449a (Fixed nullpointer exceptions)
         db = new DataBaseHandler(this);
         db.openDatabase();
+//=======
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
+//>>>>>>> fc1449ad6c8a5b23df84e390b5e0cad457535c1c
         taskList = new ArrayList<>();
         tasksRecyclerView = findViewById(R.id.tasksRecyclerView);
         tasksRecyclerView.setLayoutManager(new LinearLayoutManager(this));
