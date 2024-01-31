@@ -55,11 +55,11 @@ public class MainActivity extends AppCompatActivity implements DialogCloseListen
                     return true;
                 } else if (itemId == R.id.todolist) {
                     return true;
-                } else if (itemId == R.id.assignentsText) {
+                } else if (itemId == R.id.assignments) {
                     startActivity(new Intent(getApplicationContext(), Assignments.class));
                     overridePendingTransition(0, 0);
                     return true;
-                } else if (itemId == R.id.examsText) {
+                } else if (itemId == R.id.exams) {
                     startActivity(new Intent(getApplicationContext(), MiddlePage2.class));
                     overridePendingTransition(0, 0);
                     return true;
@@ -75,9 +75,17 @@ public class MainActivity extends AppCompatActivity implements DialogCloseListen
         db = new DataBaseHandler(this);
         db.openDatabase();
 
+
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
+
+
+//=======
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
+//>>>>>>> fc1449ad6c8a5b23df84e390b5e0cad457535c1c
 
         taskList = new ArrayList<>();
         tasksRecyclerView = findViewById(R.id.tasksRecyclerView);
