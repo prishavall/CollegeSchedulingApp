@@ -22,7 +22,7 @@ public class SplashActivity extends AppCompatActivity {
         }
 
 
-        
+
 
 
         // Check if action bar is not null before hiding

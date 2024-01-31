@@ -13,16 +13,20 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.emptyactivityapp.Adapter.AssignmentAdapter;
+
 import com.example.emptyactivityapp.Adapter.ToDoAdapter;
 
 public class RecyclerItemTouchHelper extends ItemTouchHelper.SimpleCallback {
     private ToDoAdapter adapter;
+
     private AssignmentAdapter assignmentAdapter;
+
 
     public RecyclerItemTouchHelper(ToDoAdapter adapter) {
         super(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT);
         this.adapter = adapter;
     }
+
 
     public RecyclerItemTouchHelper(AssignmentAdapter adapter) {
         super(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT);
@@ -30,6 +34,7 @@ public class RecyclerItemTouchHelper extends ItemTouchHelper.SimpleCallback {
 
 
     }
+
 
     @Override
     public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
@@ -73,7 +78,11 @@ public class RecyclerItemTouchHelper extends ItemTouchHelper.SimpleCallback {
             icon = ContextCompat.getDrawable(adapter.getContext(), R.drawable.baseline_add_24);
             background = new ColorDrawable(ContextCompat.getColor(adapter.getContext(), R.color.colorPrimaryDark));
         } else {
+
             icon = ContextCompat.getDrawable(adapter.getContext(), R.drawable.baseline_auto_delete);
+
+            icon = ContextCompat.getDrawable(adapter.getContext(), R.drawable.baseline_auto_delete_24);
+
             background = new ColorDrawable(Color.RED);
 
         }
