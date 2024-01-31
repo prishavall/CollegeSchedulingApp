@@ -40,7 +40,5 @@ public class Assignments extends AppCompatActivity {
                 return false;
             }
         });
-        bottomNavigationView.setSelectedItemId(R.id.assignments);
-        bottomNavigationView.setOnItemSelectedListener(null);
     }
 }
