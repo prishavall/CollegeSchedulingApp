@@ -73,6 +73,7 @@ public class DataBaseHandler extends SQLiteOpenHelper
         }
         finally {
             db.endTransaction();
+            assert cur != null;
             cur.close();
         }
         return taskList;

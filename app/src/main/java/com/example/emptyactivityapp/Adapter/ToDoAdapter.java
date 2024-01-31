@@ -28,12 +28,15 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ViewHolder> {
         this.db = db;
     }
 
+    @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent. getContext())
                 .inflate(R.layout.task_layout, parent, false);
         return new ViewHolder(itemView);
 
     }
+
+    @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         db.openDatabase();
         ToDoModel item  = todoList.get(position);
@@ -52,6 +55,7 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ViewHolder> {
 
     }
 
+    @Override
     public int getItemCount() {
         return todoList.size();
     }
@@ -68,6 +72,13 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ViewHolder> {
 
     public Context getContext() {
         return activity;
+    }
+
+    public void deleteItem(int position) {
+        ToDoModel item = todoList.get(position);
+        db.deleteTAsk(item.getId());
+        todoList.remove(position);
+        notifyItemRemoved(position);
     }
 
 
