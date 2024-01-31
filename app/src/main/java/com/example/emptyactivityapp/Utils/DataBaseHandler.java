@@ -28,7 +28,7 @@ public class DataBaseHandler extends SQLiteOpenHelper
     private SQLiteDatabase db;
 
 
-    private DataBaseHandler(Context context) {
+    public DataBaseHandler(Context context) {
         super(context, NAME, null, VERSION);
 
     }
@@ -73,6 +73,7 @@ public class DataBaseHandler extends SQLiteOpenHelper
         }
         finally {
             db.endTransaction();
+            assert cur != null;
             cur.close();
         }
         return taskList;
