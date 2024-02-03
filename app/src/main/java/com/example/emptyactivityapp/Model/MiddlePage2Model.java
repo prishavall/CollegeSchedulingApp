@@ -1,17 +1,24 @@
 package com.example.emptyactivityapp.Model;
 
-public class MiddlePage2Model {
-    private String examName;
-    private String date;
-    private String time;
-    private String course;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
-    // Constructors, getters, and setters
-    public MiddlePage2Model(String examName, String date, String time, String course) {
-        this.examName = examName;
-        this.date = date;
-        this.time = time;
-        this.course = course;
+public class MiddlePage2Model {
+    private int id;
+    private String examName;
+    private String examLocation;
+    private String examDate;
+    private String examTime;
+    private int status;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getExamName() {
@@ -22,29 +29,59 @@ public class MiddlePage2Model {
         this.examName = examName;
     }
 
-    public String getDate() {
-        return date;
+    public String getExamLocation() {
+        return examLocation;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setExamLocation(String examLocation) {
+        this.examLocation = examLocation;
     }
 
-    public String getTime() {
-        return time;
+    public String getExamDate() {
+        return examDate;
     }
 
-    public void setTime(String time) {
-        this.time = time;
+    public void setExamDate(String examDate) {
+        this.examDate = examDate;
     }
 
-    public String getCourse() {
-        return course;
+    public String getExamTime() {
+        return examTime;
     }
 
-    public void setCourse(String course) {
-        this.course = course;
+    public void setExamTime(String examTime) {
+        this.examTime = examTime;
     }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    // ... (other methods)
+
+    // Getter and Setter methods for examDate and examTime
+
+    public String getFormattedDateTime() {
+        // Combine date and time into a formatted string
+        SimpleDateFormat inputFormat = new SimpleDateFormat("MM-dd-yy hh:mm a", Locale.getDefault());
+        SimpleDateFormat outputFormat = new SimpleDateFormat("MMMM d', 'yyyy hh:mm a", Locale.getDefault());
+
+        Date dateTime;
+
+        try {
+            dateTime = inputFormat.parse(examDate + " " + examTime);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return ""; // Handle the exception as needed
+        }
+
+        // Format the combined date and time
+        return outputFormat.format(dateTime);
+    }
+
 
 }
-
