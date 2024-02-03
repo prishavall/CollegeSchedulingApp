@@ -18,6 +18,7 @@ import com.example.emptyactivityapp.Adapter.ToDoAdapter;
 
 public class RecyclerItemTouchHelper extends ItemTouchHelper.SimpleCallback {
     private ToDoAdapter adapter;
+    private AssignmentAdapter assignmentAdapter;
 
     private AssignmentAdapter assignmentAdapter;
 

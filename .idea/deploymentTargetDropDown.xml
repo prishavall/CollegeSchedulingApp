@@ -11,18 +11,26 @@
                 <Key>
                   <type value="VIRTUAL_DEVICE_PATH" />
 
+
                   <value value="$USER_HOME$/.android/avd/Medium_Phone_API_UpsideDownCakePrivacySandbox.avd" />
 
                   <value value="$USER_HOME$/.android/avd/Pixel_7_Pro_API_UpsideDownCakePrivacySandbox.avd" />
+
+
+                  <value value="$USER_HOME$/.android/avd/Pixel_6_API_34.avd" />
 
                 </Key>
               </deviceKey>
             </Target>
           </targetSelectedWithDropDown>
 
+
           <timeTargetWasSelectedWithDropDown value="2024-02-04T00:16:49.250460Z" />
 
           <timeTargetWasSelectedWithDropDown value="2024-01-29T03:20:14.719380Z" />
+
+
+          <timeTargetWasSelectedWithDropDown value="2024-02-03T21:27:15.131915Z" />
 
         </State>
       </entry>
