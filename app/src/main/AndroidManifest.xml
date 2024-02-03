@@ -13,8 +13,8 @@
         android:theme="@style/Theme.EmptyActivityApp"
         tools:targetApi="31">
         <activity
-            android:name=".Assignments"
-            android:exported="false" />
+            android:name=".Assignment"
+            android:exported="true"/>
         <activity
             android:name=".Schedule"
             android:exported="false" />

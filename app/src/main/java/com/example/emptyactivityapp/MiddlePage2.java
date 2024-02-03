@@ -1,5 +1,6 @@
 package com.example.emptyactivityapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -52,8 +53,29 @@ public class MiddlePage2 extends AppCompatActivity implements DialogCloseListene
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
+
             public void onClick(View v) {
                 AddNewExam.newInstance().show(getSupportFragmentManager(), AddNewExam.TAG);
+
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int itemId = item.getItemId();
+                if (itemId == R.id.simpleschedule) {
+                    startActivity(new Intent(getApplicationContext(), Schedule.class));
+                    overridePendingTransition(0, 0);
+                    return true;
+                } else if (itemId == R.id.exams) {
+                    return true;
+                } else if (itemId == R.id.assignments) {
+                    startActivity(new Intent(getApplicationContext(), Assignment.class));
+                    overridePendingTransition(0, 0);
+                    return true;
+                } else if (itemId == R.id.todolist) {
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    overridePendingTransition(0, 0);
+                    return true;
+                }
+                return false;
+
             }
         });
 

@@ -9,7 +9,7 @@ import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class Assignments extends AppCompatActivity {
+public class Assignment extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
 
     @Override
@@ -27,6 +27,8 @@ public class Assignments extends AppCompatActivity {
                     overridePendingTransition(0, 0);
                     return true;
                 } else if (itemId == R.id.assignments) {
+                    startActivity(new Intent(getApplicationContext(), Assignment.class));
+                    overridePendingTransition(0, 0);
                     return true;
                 } else if (itemId == R.id.todolist) {
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));

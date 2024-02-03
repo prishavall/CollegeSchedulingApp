@@ -28,7 +28,7 @@ public class Schedule extends AppCompatActivity {
                 } else if (itemId == R.id.simpleschedule ) {
                     return true;
                 } else if (itemId == R.id.assignments) {
-                    startActivity(new Intent(getApplicationContext(), Assignments.class));
+                    startActivity(new Intent(getApplicationContext(), Assignment.class));
                     overridePendingTransition(0, 0);
                     return true;
                 } else if (itemId == R.id.exams) {

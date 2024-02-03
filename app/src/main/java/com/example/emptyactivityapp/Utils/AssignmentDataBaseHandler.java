@@ -13,14 +13,16 @@ import com.example.emptyactivityapp.Model.ToDoModel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DataBaseHandler extends SQLiteOpenHelper
-{
+public class AssignmentDataBaseHandler extends SQLiteOpenHelper {
     private static final int VERSION = 1;
     private static final String NAME = "toDoListDatabase";
 
     private static final String TODO_TABLE = "todo";
     private static String ID = "id";
     private static final String TASK  = "task";
+    private static final String TITLE = "task";
+    private static final String COURSE = "task";
+    private static final String DATE  = "task";
     private static final String STATUS= "status";
     private static final String CREATE_TODO_TABLE="CREATE TABLE "+ TODO_TABLE+" ( "+ID+
             " INTEGER PRIMARY KEY AUTOINCREMENT, "
@@ -29,7 +31,7 @@ public class DataBaseHandler extends SQLiteOpenHelper
     private SQLiteDatabase db;
 
 
-    public DataBaseHandler(Context context) {
+    public AssignmentDataBaseHandler(Context context) {
         super(context, NAME, null, VERSION);
 
     }
@@ -47,15 +49,15 @@ public class DataBaseHandler extends SQLiteOpenHelper
         db = this.getWritableDatabase();
 
     }
-    public void insertTask(ToDoModel task) {
+    public void insertTask(AssignmentModel task) {
         ContentValues cv = new ContentValues();
-        cv.put(TASK, task.getTask());
+        cv.put(TASK, task.getAssignmentName());
         cv.put(STATUS, 0);
         db.insert(TODO_TABLE, null, cv);
     }
     @SuppressLint("Range")
-    public List<ToDoModel> getAllTasks() {
-        List<ToDoModel> taskList = new ArrayList<>();
+    public List<AssignmentModel> getAllAssignments() {
+        List<AssignmentModel> taskList = new ArrayList<>();
         Cursor cur = null;
         db.beginTransaction();
         try {
@@ -63,7 +65,7 @@ public class DataBaseHandler extends SQLiteOpenHelper
             if(cur != null) {
                 if(cur.moveToFirst()) {
                     do {
-                        ToDoModel task = new ToDoModel();
+                        AssignmentModel task = new AssignmentModel();
                         task.setId(cur.getInt(cur.getColumnIndex(ID)));
                         task.setStatus(cur.getInt(cur.getColumnIndex(STATUS)));
                         taskList.add(task);
@@ -86,9 +88,11 @@ public class DataBaseHandler extends SQLiteOpenHelper
         cv.put(STATUS, status);
         db.update(TODO_TABLE, cv, ID + "=?", new String[] {String.valueOf(ID)});
     }
-    public void updateTask(int id, String task) {
+    public void updateTask(int id, String name, String course, String date) {
         ContentValues cv = new ContentValues();
-        cv.put(TASK, task);
+        cv.put(TITLE, name);
+        cv.put(COURSE, name);
+        cv.put(DATE, date);
         db.update(TODO_TABLE, cv, "id" + "+?", new String[] {String.valueOf(ID)});
 
     }
