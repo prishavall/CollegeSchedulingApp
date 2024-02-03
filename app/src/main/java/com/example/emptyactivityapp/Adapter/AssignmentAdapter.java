@@ -1,0 +1,108 @@
+package com.example.emptyactivityapp.Adapter;
+
+import android.content.Context;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+
+import androidx.recyclerview.widget.RecyclerView;
+import java.util.List;
+
+import com.example.emptyactivityapp.AddNewTask;
+import com.example.emptyactivityapp.Assignment;
+import com.example.emptyactivityapp.AssignmentActivity;
+import com.example.emptyactivityapp.MainActivity;
+import com.example.emptyactivityapp.Model.AssignmentModel;
+import com.example.emptyactivityapp.Model.ToDoModel;
+import com.example.emptyactivityapp.R;
+import com.example.emptyactivityapp.Utils.AssignmentDataBaseHandler;
+import com.example.emptyactivityapp.Utils.DataBaseHandler;
+
+public class AssignmentAdapter extends RecyclerView.Adapter<AssignmentAdapter.ViewHolder> {
+    private List<AssignmentModel> assignmentList;
+    private AssignmentActivity activity;
+    private AssignmentDataBaseHandler db;
+
+    public AssignmentAdapter(AssignmentActivity activity) {
+
+        this.activity = activity;
+        this.db = new AssignmentDataBaseHandler(activity);
+        this.db.openDatabase();
+    }
+
+    @Override
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View itemView = LayoutInflater.from(parent. getContext())
+                .inflate(R.layout.new_assignment, parent, false);
+        return new ViewHolder(itemView);
+
+    }
+
+    @Override
+    public void onBindViewHolder(ViewHolder holder, int position) {
+        db.openDatabase();
+        AssignmentModel item  = assignmentList.get(position);
+        holder.task.setText(item.getAssignmentName());
+        holder.task.setChecked(toBoolean(item.getStatus()));
+        holder.task.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    db.updateStatus(item.getId(),1);
+                } else {
+                    db.updateStatus(item.getId(),0);
+                }
+            }
+        });
+
+    }
+
+    @Override
+    public int getItemCount() {
+        return assignmentList.size();
+    }
+    private boolean toBoolean (int n) {
+        return n!= 0;
+    }
+
+
+
+    public void setTasks(List<AssignmentModel> todoList) {
+        this.assignmentList = todoList;
+        notifyDataSetChanged();
+    }
+
+    public Context getContext() {
+        return activity;
+    }
+
+    public void deleteItem(int position) {
+        AssignmentModel item = assignmentList.get(position);
+        db.deleteTAsk(item.getId());
+        assignmentList.remove(position);
+        notifyItemRemoved(position);
+    }
+
+
+    public void editItem(int position) {
+        AssignmentModel item = assignmentList.get(position);
+        Bundle bundle = new Bundle();
+        bundle.putInt("id", item.getId());
+        bundle.putString("task", item.getAssignmentName());
+        AddNewTask fragment = new AddNewTask();
+        fragment.setArguments(bundle);
+        fragment.show(activity.getSupportFragmentManager(), AddNewTask.TAG);
+    }
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        CheckBox task;
+        ViewHolder(View view) {
+            super(view);
+            task = view.findViewById(R.id.todoCheckBox);
+
+        }
+    }
+}
+

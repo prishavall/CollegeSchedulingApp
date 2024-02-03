@@ -12,14 +12,23 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.emptyactivityapp.Adapter.AssignmentAdapter;
 import com.example.emptyactivityapp.Adapter.ToDoAdapter;
 
 public class RecyclerItemTouchHelper extends ItemTouchHelper.SimpleCallback {
     private ToDoAdapter adapter;
+    private AssignmentAdapter assignmentAdapter;
 
     public RecyclerItemTouchHelper(ToDoAdapter adapter) {
         super(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT);
         this.adapter = adapter;
+    }
+
+    public RecyclerItemTouchHelper(AssignmentAdapter adapter) {
+        super(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT);
+        this.assignmentAdapter = adapter;
+
+
     }
 
     @Override

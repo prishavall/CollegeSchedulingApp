@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements DialogCloseListen
                 } else if (itemId == R.id.todolist) {
                     return true;
                 } else if (itemId == R.id.assignments) {
-                    startActivity(new Intent(getApplicationContext(), Assignments.class));
+                    startActivity(new Intent(getApplicationContext(), Assignment.class));
                     overridePendingTransition(0, 0);
                     return true;
                 } else if (itemId == R.id.exams) {
@@ -67,11 +67,11 @@ public class MainActivity extends AppCompatActivity implements DialogCloseListen
                 return false;
             }
         });
-//=======
+
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
-//>>>>>>> fc1449a (Fixed nullpointer exceptions)
+
         db = new DataBaseHandler(this);
         db.openDatabase();
 
@@ -81,11 +81,10 @@ public class MainActivity extends AppCompatActivity implements DialogCloseListen
         }
 
 
-//=======
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
-//>>>>>>> fc1449ad6c8a5b23df84e390b5e0cad457535c1c
+
 
         taskList = new ArrayList<>();
         tasksRecyclerView = findViewById(R.id.tasksRecyclerView);
