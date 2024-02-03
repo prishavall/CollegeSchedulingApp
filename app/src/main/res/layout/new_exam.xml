@@ -1,0 +1,83 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <!-- Exam Name -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/examNameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/examNameText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter exam name here"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Exam Location -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/examLocationLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/examNameLayout"
+        android:layout_marginTop="20dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/examLocationText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter exam location here"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Exam Date -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/examDateLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/examLocationLayout"
+        android:layout_marginTop="20dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/examDateText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter exam date here"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Exam Time -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/examTimeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/examDateLayout"
+        android:layout_marginTop="20dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/examTimeText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter exam time here"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/newExamButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/examTimeLayout"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="20dp"
+        android:text="Save"
+        />
+
+</RelativeLayout>
