@@ -14,7 +14,7 @@
             android:id="@+id/scheduleNameText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter schedule name here"
+            android:hint="Enter class name here"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -31,7 +31,7 @@
             android:id="@+id/scheduleLocationText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter schedule location here"
+            android:hint="Enter class location here"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -48,7 +48,7 @@
             android:id="@+id/scheduleDateText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter schedule date here"
+            android:hint="Enter class date here"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -65,7 +65,7 @@
             android:id="@+id/scheduleTimeText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter schedule time here"
+            android:hint="Enter class time here"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
     </com.google.android.material.textfield.TextInputLayout>
