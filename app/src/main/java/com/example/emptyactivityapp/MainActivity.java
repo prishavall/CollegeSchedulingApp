@@ -51,17 +51,22 @@ public class MainActivity extends AppCompatActivity implements DialogCloseListen
                 int itemId = item.getItemId();
                 if (itemId == R.id.simpleschedule) {
                     startActivity(new Intent(getApplicationContext(), Schedule.class));
-                    overridePendingTransition(0, 0);
+                    finish(); // Finish the current activity to prevent stacking
                     return true;
                 } else if (itemId == R.id.todolist) {
+                    // Check if already in MainActivity
+                    if (!MainActivity.this.getClass().equals(MainActivity.class)) {
+                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        finish(); // Finish the current activity to prevent stacking
+                    }
                     return true;
                 } else if (itemId == R.id.assignments) {
                     startActivity(new Intent(getApplicationContext(), Assignments.class));
-                    overridePendingTransition(0, 0);
+                    finish(); // Finish the current activity to prevent stacking
                     return true;
                 } else if (itemId == R.id.exams) {
                     startActivity(new Intent(getApplicationContext(), MiddlePage2.class));
-                    overridePendingTransition(0, 0);
+                    finish(); // Finish the current activity to prevent stacking
                     return true;
                 }
                 return false;
