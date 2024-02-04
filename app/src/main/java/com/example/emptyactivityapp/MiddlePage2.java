@@ -25,10 +25,9 @@ public class MiddlePage2 extends AppCompatActivity implements DialogCloseListene
     private RecyclerView examsRecyclerView;
     private MiddlePage2Adapter examsAdapter;
     private ExtendedFloatingActionButton fab;
-    private DataBaseHandlerExam db;
+    private DataBaseHandlerExam dbs;
     private BottomNavigationView bottomNavigationView;
 
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_middle_page2);
@@ -37,14 +36,15 @@ public class MiddlePage2 extends AppCompatActivity implements DialogCloseListene
             getSupportActionBar().hide();
         }
 
-        db = new DataBaseHandlerExam(this);
-        db.openDatabase();
+        dbs = new DataBaseHandlerExam(this);
+        dbs.openDatabase();
+
+        examsRecyclerWork();
 
         bottomNavigationView = findViewById(R.id.bottom_navigator);
         bottomNavigationView.setSelectedItemId(R.id.exams);
 
         bottomNavigationView.setOnItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
             public boolean onNavigationItemSelected(MenuItem item) {
                 int itemId = item.getItemId();
                 if (itemId == R.id.simpleschedule) {
@@ -60,16 +60,11 @@ public class MiddlePage2 extends AppCompatActivity implements DialogCloseListene
                     finish();
                     return true;
                 } else if (itemId == R.id.exams) {
-                    return true; // Already in the exams page
+                    return true;
                 }
                 return false;
             }
         });
-
-        examsRecyclerView = findViewById(R.id.examsRecyclerView);
-        examsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        examsAdapter = new MiddlePage2Adapter(this);
-        examsRecyclerView.setAdapter(examsAdapter);
 
         fab = findViewById(R.id.newExamButton);
 
@@ -77,21 +72,24 @@ public class MiddlePage2 extends AppCompatActivity implements DialogCloseListene
         itemTouchHelper.attachToRecyclerView(examsRecyclerView);
 
         fab.setOnClickListener(new View.OnClickListener() {
-            @Override
             public void onClick(View v) {
                 AddNewExam.newInstance().show(getSupportFragmentManager(), AddNewExam.TAG);
             }
         });
-
         loadExams();
     }
 
+    private void examsRecyclerWork() {
+        examsRecyclerView = findViewById(R.id.examsRecyclerView);
+        examsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        examsAdapter = new MiddlePage2Adapter(this);
+        examsRecyclerView.setAdapter(examsAdapter);
+    }
     private void loadExams() {
-        List<MiddlePage2Model> examList = db.getAllExams();
+        List<MiddlePage2Model> examList = dbs.getAllExams();
         Collections.reverse(examList);
         examsAdapter.setExams(examList);
     }
-
     @Override
     public void handleDialogClose(DialogInterface dialog) {
         loadExams();
