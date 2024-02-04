@@ -36,28 +36,37 @@ public class MainActivity extends AppCompatActivity implements DialogCloseListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 //<<<<<<< HEAD
 //<<<<<<< HEAD
         Objects.requireNonNull(getSupportActionBar()).hide();
         bottomNavigationView = findViewById(R.id.bottom_navigator);
         bottomNavigationView.setSelectedItemId(R.id.todolist);
+
+
+
         bottomNavigationView.setOnItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int itemId = item.getItemId();
                 if (itemId == R.id.simpleschedule) {
                     startActivity(new Intent(getApplicationContext(), Schedule.class));
-                    overridePendingTransition(0, 0);
+                    finish(); // Finish the current activity to prevent stacking
                     return true;
                 } else if (itemId == R.id.todolist) {
+                    // Check if already in MainActivity
+                    if (!MainActivity.this.getClass().equals(MainActivity.class)) {
+                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        finish(); // Finish the current activity to prevent stacking
+                    }
                     return true;
                 } else if (itemId == R.id.assignments) {
                     startActivity(new Intent(getApplicationContext(), Assignments.class));
-                    overridePendingTransition(0, 0);
+                    finish(); // Finish the current activity to prevent stacking
                     return true;
                 } else if (itemId == R.id.exams) {
                     startActivity(new Intent(getApplicationContext(), MiddlePage2.class));
-                    overridePendingTransition(0, 0);
+                    finish(); // Finish the current activity to prevent stacking
                     return true;
                 }
                 return false;
