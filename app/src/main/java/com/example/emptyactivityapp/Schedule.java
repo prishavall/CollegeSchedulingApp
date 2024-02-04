@@ -1,43 +1,74 @@
 package com.example.emptyactivityapp;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
+import android.content.DialogInterface;
 import android.os.Bundle;
-import android.view.MenuItem;
+import android.view.View;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.example.emptyactivityapp.Adapter.ScheduleAdapter;
+import com.example.emptyactivityapp.Model.ScheduleModel;
+import com.example.emptyactivityapp.RecyclerItemTouchHelperSchedules;
+import com.example.emptyactivityapp.Utils.DataBaseHandlerSchedule;
+import com.example.emptyactivityapp.Utils.DataBaseHandlerSchedule;
+import com.example.emptyactivityapp.Utils.DataBaseHandlerSchedule;
+import com.example.emptyactivityapp.Utils.DataBaseHandlerSchedule;
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 
-public class Schedule extends AppCompatActivity {
-    BottomNavigationView bottomNavigationView;
+import java.util.Collections;
+import java.util.List;
+
+public class Schedule extends AppCompatActivity implements DialogCloseListener {
+
+    private RecyclerView schedulesRecyclerView;
+    private ScheduleAdapter schedulesAdapter;
+    private ExtendedFloatingActionButton fab;
+    private DataBaseHandlerSchedule db;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schedule);
-        bottomNavigationView = findViewById(R.id.bottom_navigator);
-        bottomNavigationView.setSelectedItemId(R.id.simpleschedule);
-        bottomNavigationView.setOnItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
+
+        db = new DataBaseHandlerSchedule(this);
+        db.openDatabase();
+
+        schedulesRecyclerView = findViewById(R.id.schedulesRecyclerView);
+        schedulesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        schedulesAdapter = new ScheduleAdapter(this); // pass the listener
+        schedulesRecyclerView.setAdapter(schedulesAdapter);
+
+        fab = findViewById(R.id.newScheduleButton);
+
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new RecyclerItemTouchHelperSchedules(schedulesAdapter));
+        itemTouchHelper.attachToRecyclerView(schedulesRecyclerView);
+
+        fab.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                int itemId = item.getItemId();
-                if (itemId == R.id.todolist) {
-                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                    overridePendingTransition(0, 0);
-                    return true;
-                } else if (itemId == R.id.simpleschedule ) {
-                    return true;
-                } else if (itemId == R.id.assignments) {
-                    startActivity(new Intent(getApplicationContext(), Assignments.class));
-                    overridePendingTransition(0, 0);
-                    return true;
-                } else if (itemId == R.id.exams) {
-                    startActivity(new Intent(getApplicationContext(), MiddlePage2.class));
-                    overridePendingTransition(0, 0);
-                    return true;
-                }
-                return false;
+            public void onClick(View v) {
+                AddNewSchedule.newInstance().show(getSupportFragmentManager(), AddNewSchedule.TAG);
             }
         });
+
+        loadSchedules();  // Load schedules when the activity starts
+    }
+
+    private void loadSchedules() {
+        List<ScheduleModel> scheduleList = db.getAllSchedules();
+        Collections.reverse(scheduleList);
+        schedulesAdapter.setSchedules(scheduleList);
+    }
+
+    @Override
+    public void handleDialogClose(DialogInterface dialog) {
+        // Reload schedules after adding a new schedule
+        loadSchedules();
     }
 }
