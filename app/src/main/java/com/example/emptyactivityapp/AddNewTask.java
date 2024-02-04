@@ -22,7 +22,7 @@ import com.example.emptyactivityapp.Utils.DataBaseHandler;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 
-import java.util.Objects;
+
 
 public class AddNewTask extends BottomSheetDialogFragment {
 

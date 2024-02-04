@@ -1,22 +1,18 @@
 package com.example.emptyactivityapp;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.ItemTouchHelper;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.emptyactivityapp.Adapter.MiddlePage2Adapter;
-import com.example.emptyactivityapp.AddNewExam;
-import com.example.emptyactivityapp.DialogCloseListener;
 import com.example.emptyactivityapp.Model.MiddlePage2Model;
-import com.example.emptyactivityapp.R;
-import com.example.emptyactivityapp.RecyclerItemTouchHelperExams;
 import com.example.emptyactivityapp.Utils.DataBaseHandlerExam;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
