@@ -7,7 +7,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.example.emptyactivityapp.Adapter.MiddlePage2Adapter;
@@ -56,25 +58,6 @@ public class MiddlePage2 extends AppCompatActivity implements DialogCloseListene
 
             public void onClick(View v) {
                 AddNewExam.newInstance().show(getSupportFragmentManager(), AddNewExam.TAG);
-
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                int itemId = item.getItemId();
-                if (itemId == R.id.simpleschedule) {
-                    startActivity(new Intent(getApplicationContext(), Schedule.class));
-                    overridePendingTransition(0, 0);
-                    return true;
-                } else if (itemId == R.id.exams) {
-                    return true;
-                } else if (itemId == R.id.assignments) {
-                    startActivity(new Intent(getApplicationContext(), Assignment.class));
-                    overridePendingTransition(0, 0);
-                    return true;
-                } else if (itemId == R.id.todolist) {
-                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                    overridePendingTransition(0, 0);
-                    return true;
-                }
-                return false;
 
             }
         });

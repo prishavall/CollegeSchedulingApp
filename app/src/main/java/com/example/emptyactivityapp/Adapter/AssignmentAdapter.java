@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
@@ -36,27 +37,18 @@ public class AssignmentAdapter extends RecyclerView.Adapter<AssignmentAdapter.Vi
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent. getContext())
-                .inflate(R.layout.new_assignment, parent, false);
+                .inflate(R.layout.assignment_card, parent, false);
         return new ViewHolder(itemView);
 
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        db.openDatabase();
         AssignmentModel item  = assignmentList.get(position);
-        holder.task.setText(item.getAssignmentName());
-        holder.task.setChecked(toBoolean(item.getStatus()));
-        holder.task.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
-                    db.updateStatus(item.getId(),1);
-                } else {
-                    db.updateStatus(item.getId(),0);
-                }
-            }
-        });
+        holder.textAssignmentName.setText(item.getAssignmentName());
+        holder.textAssignmentCourse.setText(item.getCourse());
+        holder.textAssignmentDate.setText(item.getDate());
+
 
     }
 
@@ -70,7 +62,7 @@ public class AssignmentAdapter extends RecyclerView.Adapter<AssignmentAdapter.Vi
 
 
 
-    public void setTasks(List<AssignmentModel> todoList) {
+    public void setAssignments(List<AssignmentModel> todoList) {
         this.assignmentList = todoList;
         notifyDataSetChanged();
     }
@@ -97,10 +89,14 @@ public class AssignmentAdapter extends RecyclerView.Adapter<AssignmentAdapter.Vi
         fragment.show(activity.getSupportFragmentManager(), AddNewTask.TAG);
     }
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        CheckBox task;
+        private TextView textAssignmentName;
+        private TextView textAssignmentCourse;
+        private TextView textAssignmentDate;
         ViewHolder(View view) {
             super(view);
-            task = view.findViewById(R.id.todoCheckBox);
+            textAssignmentName = view.findViewById(R.id.textAssignmentName);
+            textAssignmentCourse = view.findViewById(R.id.textAssignmentCourse);
+            textAssignmentDate = view.findViewById(R.id.assignmentDateText);
 
         }
     }

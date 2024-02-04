@@ -1,0 +1,56 @@
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/card_border"
+    android:orientation="vertical"
+    android:layout_margin="8dp"
+    app:cardBackgroundColor="#E6E6FA"
+    android:foreground="@drawable/bg_roundrect_ripple_light_border"
+    app:cardCornerRadius="23dp"
+    app:cardElevation="0dp">
+
+
+    <RelativeLayout
+        android:id="@+id/cardviewLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+
+        <!-- Icon ImageView -->
+        <ImageView
+            android:id="@+id/iconImageView"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:src="@drawable/ic_exams"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="8dp"/>
+
+        <!-- Text Views -->
+        <TextView
+            android:id="@+id/textAssignmentName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/iconImageView"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/textAssignmentCourse"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textAssignmentName"
+            android:layout_toEndOf="@id/iconImageView"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:id="@+id/textAssignmentDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textAssignmentCourse"
+            android:layout_toEndOf="@id/iconImageView"
+            android:textSize="14sp"/>
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

@@ -77,7 +77,7 @@ public class AssignmentActivity extends AppCompatActivity implements DialogClose
     private void loadAssignments() {
         List<AssignmentModel> assignmentList = db.getAllAssignments();
         Collections.reverse(assignmentList);
-        assignmentsAdapter.setTasks(assignmentList);
+        assignmentsAdapter.setAssignments(assignmentList);
     }
 
     BottomNavigationView bottomNavigationView;
