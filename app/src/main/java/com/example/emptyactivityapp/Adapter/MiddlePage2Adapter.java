@@ -1,22 +1,21 @@
 package com.example.emptyactivityapp.Adapter;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.emptyactivityapp.AddNewExam;
 import com.example.emptyactivityapp.MiddlePage2;
 import com.example.emptyactivityapp.Model.MiddlePage2Model;
 import com.example.emptyactivityapp.R;
-import com.example.emptyactivityapp.Utils.DataBaseHandler;
 import com.example.emptyactivityapp.Utils.DataBaseHandlerExam;
 
 import java.util.List;
-import android.util.Log;
 
 public class MiddlePage2Adapter extends RecyclerView.Adapter<MiddlePage2Adapter.ViewHolder> {
     private List<MiddlePage2Model> examList;

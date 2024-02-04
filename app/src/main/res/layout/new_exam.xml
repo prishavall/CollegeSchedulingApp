@@ -3,7 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <!-- Exam Name -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/examNameLayout"
         android:layout_width="match_parent"
@@ -19,7 +18,7 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- Exam Location -->
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/examLocationLayout"
         android:layout_width="match_parent"
@@ -36,7 +35,7 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- Exam Date -->
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/examDateLayout"
         android:layout_width="match_parent"
@@ -53,7 +52,7 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- Exam Time -->
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/examTimeLayout"
         android:layout_width="match_parent"

@@ -18,7 +18,7 @@
         android:padding="16dp">
 
 
-        <!-- Icon ImageView -->
+
         <ImageView
             android:id="@+id/iconImageView"
             android:layout_width="36dp"
@@ -28,7 +28,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginEnd="8dp"/>
 
-        <!-- Text Views -->
+
         <TextView
             android:id="@+id/textExamName"
             android:layout_width="match_parent"
