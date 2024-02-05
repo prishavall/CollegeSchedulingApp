@@ -6,10 +6,10 @@
     app:cardElevation="4dp"
     app:cardCornerRadius="8dp"
     android:layout_marginHorizontal="16dp"
-    android:layout_marginVertical="8dp" >
+    android:layout_marginVertical="8dp">
 
     <RelativeLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="8dp">
 
@@ -20,7 +20,15 @@
             android:paddingStart="8dp"
             android:buttonTint="#673AB7"
             tools:text="Go to the market and bring vegetables immediately today."
-             />
+            />
 
+        <TextView
+            android:id="@+id/taskCategoryText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/todoCheckBox"
+            android:layout_marginStart="225dp"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

@@ -33,13 +33,13 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
         this.db.openDatabase();
     }
 
-    @Override
+
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.schedule_card, parent, false);
         return new ViewHolder(view);
     }
 
-    @Override
+
     public void onBindViewHolder(ViewHolder holder, int position) {
         ScheduleModel schedule = scheduleList.get(position);
 

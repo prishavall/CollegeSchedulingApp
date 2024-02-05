@@ -3,6 +3,15 @@ package com.example.emptyactivityapp.Model;
 public class ToDoModel {
     private int id, status;
     private String task;
+    private String category;
+
+    public void setCategory(String string) {
+        this.category = string;
+
+    }
+    public String getCategory() {
+        return category;
+    }
     public int getId() {
         return id;
     }

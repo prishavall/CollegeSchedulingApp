@@ -84,7 +84,7 @@ public class MiddlePage2Adapter extends RecyclerView.Adapter<MiddlePage2Adapter.
         }
     }
 
-    public void editItem(int position) {
+    public void editItem(int position)  {
         MiddlePage2Model exam = examList.get(position);
         Bundle bundy = new Bundle();
         bundy.putInt("id", (Integer) exam.getId());
