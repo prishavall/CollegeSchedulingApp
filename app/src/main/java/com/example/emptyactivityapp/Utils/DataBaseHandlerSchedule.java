@@ -43,7 +43,6 @@ public class DataBaseHandlerSchedule extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_SCHEDULE_TABLE);
-        Log.d("DataBaseHandlerExam", "Table created successfully");
     }
 
     @Override
@@ -67,9 +66,9 @@ public class DataBaseHandlerSchedule extends SQLiteOpenHelper {
         long result = db.insert(SCHEDULE_TABLE, null, cv);
 
         if (result != -1) {
-            Log.d("InsertSchedule", "Schedule inserted successfully");
+            Log.d("InsertSchedule", "Schedule was inserted successfully");
         } else {
-            Log.e("InsertSchedule", "Error inserting schedule into the database");
+            Log.e("InsertSchedule", "Theres an error inserting schedule into the database");
         }
     }
 
@@ -94,7 +93,7 @@ public class DataBaseHandlerSchedule extends SQLiteOpenHelper {
                 } while (cur.moveToNext());
             }
         } catch (Exception e) {
-            Log.e("GetAllSchedules", "Error getting schedules from the database", e);
+            Log.e("GetAllSchedules", "Theres an error getting schedules from the database", e);
         } finally {
             if (cur != null && !cur.isClosed()) {
                 cur.close();
@@ -104,11 +103,6 @@ public class DataBaseHandlerSchedule extends SQLiteOpenHelper {
         return scheduleList;
     }
 
-    public void updateStatus(int id, int status) {
-        ContentValues cv = new ContentValues();
-        cv.put(STATUS, status);
-        db.update(SCHEDULE_TABLE, cv, ID + "=?", new String[]{String.valueOf(id)});
-    }
 
 
     public void updateSchedule(int id, ScheduleModel schedule) {

@@ -9,13 +9,16 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.core.content.ContextCompat;
 
+import com.example.emptyactivityapp.Model.MiddlePage2Model;
 import com.example.emptyactivityapp.Model.ScheduleModel;
+import com.example.emptyactivityapp.Utils.DataBaseHandlerExam;
 import com.example.emptyactivityapp.Utils.DataBaseHandlerSchedule;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
@@ -29,20 +32,21 @@ public class AddNewSchedule extends BottomSheetDialogFragment {
         return new AddNewSchedule();
     }
 
-    @Override
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setStyle(STYLE_NORMAL, R.style.DialogStyle);
     }
 
-    @Override
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.new_schedule, container, false);
-        getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+        Window newDialogWindow = getDialog().getWindow();
+        newDialogWindow.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         return view;
     }
 
-    @Override
+
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         newScheduleNameText = getView().findViewById(R.id.scheduleNameText);
@@ -52,13 +56,13 @@ public class AddNewSchedule extends BottomSheetDialogFragment {
         newScheduleSaveButton = getView().findViewById(R.id.newScheduleButton);
 
         boolean isUpdate = false;
-        final Bundle bundle = getArguments();
-        if (bundle != null) {
+        final Bundle bundles = getArguments();
+        if (bundles != null) {
             isUpdate = true;
-            String scheduleName = bundle.getString("scheduleName");
-            String scheduleLocation = bundle.getString("scheduleLocation");
-            String scheduleDate = bundle.getString("scheduleDate");
-            String scheduleTime = bundle.getString("scheduleTime");
+            String scheduleName = bundles.getString("scheduleName");
+            String scheduleLocation = bundles.getString("scheduleLocation");
+            String scheduleDate = bundles.getString("scheduleDate");
+            String scheduleTime = bundles.getString("scheduleTime");
 
             newScheduleNameText.setText(scheduleName);
             newScheduleLocationText.setText(scheduleLocation);
@@ -67,7 +71,8 @@ public class AddNewSchedule extends BottomSheetDialogFragment {
 
             if (scheduleName != null && scheduleName.length() > 0 && scheduleLocation != null && scheduleLocation.length() > 0 &&
                     scheduleDate != null && scheduleDate.length() > 0 && scheduleTime != null && scheduleTime.length() > 0) {
-                newScheduleSaveButton.setTextColor(ContextCompat.getColor(getContext(), R.color.colorPrimaryDark));
+                int color = ContextCompat.getColor(requireContext(), R.color.colorPrimaryDark);
+                newScheduleSaveButton.setTextColor(color);
             }
         }
 
@@ -79,7 +84,7 @@ public class AddNewSchedule extends BottomSheetDialogFragment {
         newScheduleDateText.addTextChangedListener(createTextWatcher());
         newScheduleTimeText.addTextChangedListener(createTextWatcher());
 
-        boolean finalIsUpdate = isUpdate;
+        boolean IsUpdatept2 = isUpdate;
 
         newScheduleSaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,8 +95,8 @@ public class AddNewSchedule extends BottomSheetDialogFragment {
                 String scheduleTime = newScheduleTimeText.getText().toString();
 
                 ScheduleModel schedule = null;
-                if (finalIsUpdate) {
-                    db.updateSchedule(bundle.getInt("id"), schedule);
+                if (IsUpdatept2) {
+                    db.updateSchedule(bundles.getInt("id"), schedule);
                 } else {
                     schedule = new ScheduleModel();
                     schedule.setScheduleName(scheduleName);
@@ -105,34 +110,32 @@ public class AddNewSchedule extends BottomSheetDialogFragment {
         });
     }
 
-    private TextWatcher createTextWatcher() {
+
+
+    private TextWatcher createTextWatcher() { //done
         return new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
 
-            @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s.toString().equals("")) {
-                    newScheduleSaveButton.setEnabled(false);
-                    newScheduleSaveButton.setTextColor(Color.GRAY);
-                } else {
-                    newScheduleSaveButton.setEnabled(true);
-                    newScheduleSaveButton.setTextColor(ContextCompat.getColor(getContext(), R.color.colorPrimaryDark));
-                }
+                newScheduleSaveButton.setEnabled(!s.toString().isEmpty());
+                newScheduleSaveButton.setTextColor(s.toString().isEmpty() ? Color.GRAY : ContextCompat.getColor(getContext(), R.color.colorPrimaryDark));
             }
 
-            @Override
             public void afterTextChanged(Editable s) {
+            }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
         };
     }
 
-    @Override
+
     public void onDismiss(DialogInterface dialog) {
         Activity activity = getActivity();
+        DialogCloseListener clistener = null;
         if (activity instanceof DialogCloseListener) {
-            ((DialogCloseListener) activity).handleDialogClose(dialog);
+            clistener = (DialogCloseListener) activity;
+        }
+        if (clistener != null) {
+            clistener.handleDialogClose(dialog);
         }
     }
 }

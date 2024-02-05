@@ -49,7 +49,7 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ViewHolder> {
         final ToDoModel item = todoList.get(position);
 
         if (item.getCategory() != null && !item.getCategory().isEmpty()) {
-            vh.taskCategorytext.setVisibility(View.VISIBLE);
+            vh.taskCategorytext.setVisibility(View.VISIBLE); //testing if its gonna show up
             vh.taskCategorytext.setText(item.getCategory());
         } else {
 
@@ -75,10 +75,12 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ViewHolder> {
         if (j != 0) {
             return true;
         }
-        return false;
+        else {
+            return false;
+        }
     }
 
-    @Override
+
     public int getItemCount() {
         if (todoList == null) {
             return 0;
@@ -126,7 +128,7 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ViewHolder> {
 
         AddNewTask fragment = new AddNewTask();
         fragment.setArguments(bundy);
-        fragment.show(activity.getSupportFragmentManager(), AddNewExam.TAG);
+        fragment.show(activity.getSupportFragmentManager(), AddNewTask.TAG);
     }
 
 }
