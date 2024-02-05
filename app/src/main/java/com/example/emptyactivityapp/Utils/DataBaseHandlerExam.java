@@ -93,21 +93,13 @@ public class DataBaseHandlerExam extends SQLiteOpenHelper {
                     examList.add(exam);
                 } while (cur.moveToNext());
             }
-        } catch (Exception e) {
-            Log.e("GetAllExams", "Error getting exams from the database", e);
-        } finally {
+        }  finally {
             if (cur != null && !cur.isClosed()) {
                 cur.close();
             }
         }
 
         return examList;
-    }
-
-    public void updateStatus(int id, int status) {
-        ContentValues cv = new ContentValues();
-        cv.put(STATUS, status);
-        db.update(EXAM_TABLE, cv, ID + "=?", new String[]{String.valueOf(id)});
     }
 
 

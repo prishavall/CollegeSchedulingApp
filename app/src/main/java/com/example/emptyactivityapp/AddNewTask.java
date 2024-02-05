@@ -13,10 +13,9 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
+import com.example.emptyactivityapp.Model.MiddlePage2Model;
 import com.example.emptyactivityapp.Model.ToDoModel;
 import com.example.emptyactivityapp.Utils.DataBaseHandler;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
@@ -27,7 +26,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 public class AddNewTask extends BottomSheetDialogFragment {
 
     public static final String TAG = "ActionBottomDialog";
-    private EditText newTaskText;
+    private EditText newTaskText, newCategoryText;
     private Button newTaskSaveButton;
 
     private DataBaseHandler db;
@@ -36,16 +35,14 @@ public class AddNewTask extends BottomSheetDialogFragment {
         return new AddNewTask();
     }
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
+    public void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setStyle(STYLE_NORMAL, R.style.DialogStyle);
     }
 
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
+
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.new_task, container, false);
         getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
@@ -53,10 +50,11 @@ public class AddNewTask extends BottomSheetDialogFragment {
         return view;
     }
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+
+    public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         newTaskText = requireView().findViewById(R.id.newTaskText);
+        newCategoryText = getView().findViewById(R.id.taskCategoryText);
         newTaskSaveButton = getView().findViewById(R.id.newTaskButton);
 
         boolean isUpdate = false;
@@ -75,33 +73,39 @@ public class AddNewTask extends BottomSheetDialogFragment {
         db.openDatabase();
 
         newTaskText.addTextChangedListener(new TextWatcher() {
-            @Override
+
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
 
-            @Override
+
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 newTaskSaveButton.setEnabled(!s.toString().isEmpty());
                 newTaskSaveButton.setTextColor(s.toString().isEmpty() ? Color.GRAY : ContextCompat.getColor(getContext(), R.color.colorPrimaryDark));
             }
 
 
-            @Override
+
             public void afterTextChanged(Editable s) {
             }
         });
 
         final boolean finalIsUpdate = isUpdate;
         newTaskSaveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
+
             public void onClick(View v) {
                 String text = newTaskText.getText().toString();
+                String category = newCategoryText.getText().toString();
+
                 if(finalIsUpdate){
-                    db.updateTask(bundle.getInt("id"), text);
+                    ToDoModel tmodel = new ToDoModel();
+                    tmodel.setTask(text);
+                    tmodel.setCategory(category);
+                    db.updateTask(bundle.getInt("id"), tmodel);
                 }
                 else {
                     ToDoModel task = new ToDoModel();
                     task.setTask(text);
+                    task.setCategory(category);
                     task.setStatus(0);
                     db.insertTask(task);
                 }
@@ -110,7 +114,7 @@ public class AddNewTask extends BottomSheetDialogFragment {
         });
     }
 
-    @Override
+
     public void onDismiss(DialogInterface dialog) {
         Activity activity = getActivity();
         DialogCloseListener clistener = null;
