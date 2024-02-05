@@ -11,10 +11,6 @@ import android.view.View;
 
 import com.example.emptyactivityapp.Adapter.ScheduleAdapter;
 import com.example.emptyactivityapp.Model.ScheduleModel;
-import com.example.emptyactivityapp.RecyclerItemTouchHelperSchedules;
-import com.example.emptyactivityapp.Utils.DataBaseHandlerSchedule;
-import com.example.emptyactivityapp.Utils.DataBaseHandlerSchedule;
-import com.example.emptyactivityapp.Utils.DataBaseHandlerSchedule;
 import com.example.emptyactivityapp.Utils.DataBaseHandlerSchedule;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 
@@ -25,10 +21,9 @@ public class Schedule extends AppCompatActivity implements DialogCloseListener {
 
     private RecyclerView schedulesRecyclerView;
     private ScheduleAdapter schedulesAdapter;
-    private ExtendedFloatingActionButton fab;
-    private DataBaseHandlerSchedule db;
+    private ExtendedFloatingActionButton efab;
+    private DataBaseHandlerSchedule dbs;
 
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schedule);
@@ -37,38 +32,45 @@ public class Schedule extends AppCompatActivity implements DialogCloseListener {
             getSupportActionBar().hide();
         }
 
-        db = new DataBaseHandlerSchedule(this);
-        db.openDatabase();
+        setUpDatabases();
 
-        schedulesRecyclerView = findViewById(R.id.schedulesRecyclerView);
-        schedulesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        schedulesAdapter = new ScheduleAdapter(this); // pass the listener
-        schedulesRecyclerView.setAdapter(schedulesAdapter);
+        schedulesStuff();
 
-        fab = findViewById(R.id.newScheduleButton);
+        efab = findViewById(R.id.newScheduleButton);
 
-        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new RecyclerItemTouchHelperSchedules(schedulesAdapter));
-        itemTouchHelper.attachToRecyclerView(schedulesRecyclerView);
+        itemTouchWork();
 
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
+        efab.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 AddNewSchedule.newInstance().show(getSupportFragmentManager(), AddNewSchedule.TAG);
             }
         });
-
-        loadSchedules();  // Load schedules when the activity starts
+        loadSchedules();
     }
 
+    private void setUpDatabases() {
+        dbs = new DataBaseHandlerSchedule(this);
+        dbs.openDatabase();
+    }
+
+    private void schedulesStuff() {
+        schedulesRecyclerView = findViewById(R.id.schedulesRecyclerView);
+        schedulesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        schedulesAdapter = new ScheduleAdapter(this);
+        schedulesRecyclerView.setAdapter(schedulesAdapter);
+    }
+
+    private void itemTouchWork() {
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new RecyclerItemTouchHelperSchedules(schedulesAdapter));
+        itemTouchHelper.attachToRecyclerView(schedulesRecyclerView);
+    }
     private void loadSchedules() {
-        List<ScheduleModel> scheduleList = db.getAllSchedules();
+        List<ScheduleModel> scheduleList = dbs.getAllSchedules();
         Collections.reverse(scheduleList);
         schedulesAdapter.setSchedules(scheduleList);
     }
 
-    @Override
     public void handleDialogClose(DialogInterface dialog) {
-        // Reload schedules after adding a new schedule
         loadSchedules();
     }
 }

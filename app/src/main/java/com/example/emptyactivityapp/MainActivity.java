@@ -31,8 +31,6 @@ public class MainActivity extends AppCompatActivity implements DialogCloseListen
     private DataBaseHandler db;
 
 
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -40,11 +38,8 @@ public class MainActivity extends AppCompatActivity implements DialogCloseListen
         Objects.requireNonNull(getSupportActionBar()).hide();
         bottomNavigationView = findViewById(R.id.bottom_navigator);
         bottomNavigationView.setSelectedItemId(R.id.todolist);
-
-
-
         bottomNavigationView.setOnItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
+
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int itemId = item.getItemId();
                 if (itemId == R.id.simpleschedule) {
@@ -90,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements DialogCloseListen
         Collections.reverse(taskList);
         tasksAdapter.setTasks(taskList);
         fab.setOnClickListener(new View.OnClickListener() {
-            @Override
+
             public void onClick(View v) {
                 AddNewTask.newInstance().show(getSupportFragmentManager(), AddNewTask.TAG);
             }
@@ -98,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements DialogCloseListen
 
     }
     BottomNavigationView bottomNavigationView;
-    @Override
+
     public void handleDialogClose(DialogInterface dialog) {
         taskList = db.getAllTasks();
         // might modify when sorting dates
