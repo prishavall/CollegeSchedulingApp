@@ -35,24 +35,26 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
 
 
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.schedule_card, parent, false);
+        Context contexto = parent.getContext();
+        LayoutInflater inflatable = LayoutInflater.from(contexto);
+        View view = inflatable.inflate(R.layout.schedule_card, parent, false);
         return new ViewHolder(view);
     }
 
 
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder vh, int position) {
         ScheduleModel schedule = scheduleList.get(position);
-
-        holder.textScheduleName.setText(schedule.getScheduleName());
-        holder.textScheduleLocation.setText(schedule.getScheduleLocation());
-
-        holder.textScheduleDateTime.setText(schedule.getFormattedDateTime());
+        vh.textScheduleName.setText(schedule.getScheduleName());
+        vh.textScheduleLocation.setText(schedule.getScheduleLocation());
+        vh.textScheduleDateTime.setText(schedule.getFormattedDateTime());
     }
 
 
     public void setSchedules(List<ScheduleModel> schedules) {
-        this.scheduleList = schedules;
-        notifyDataSetChanged();
+        if (schedules != null) {
+            this.scheduleList = schedules;
+            notifyDataSetChanged();
+        }
     }
 
     public int getItemCount() {
@@ -69,7 +71,8 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
     public void deleteItem(int position) {
         if (db != null) {
             ScheduleModel schedule = scheduleList.get(position);
-            db.deleteSchedule(schedule.getId());
+            int sID = schedule.getId();
+            db.deleteSchedule(sID);
             scheduleList.remove(position);
             notifyItemRemoved(position);
         }
@@ -77,15 +80,15 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
 
     public void editItem(int position) {
         ScheduleModel schedule = scheduleList.get(position);
-        Bundle bundle = new Bundle();
-        bundle.putInt("id", (Integer) schedule.getId());
-        bundle.putString("scheduleName", schedule.getScheduleName());
-        bundle.putString("location", schedule.getScheduleLocation());
-        bundle.putString("date", schedule.getScheduleDate());
-        bundle.putString("time", schedule.getScheduleTime());
+        Bundle bundles = new Bundle();
+        bundles.putInt("id", (Integer) schedule.getId());
+        bundles.putString("scheduleName", schedule.getScheduleName());
+        bundles.putString("location", schedule.getScheduleLocation());
+        bundles.putString("date", schedule.getScheduleDate());
+        bundles.putString("time", schedule.getScheduleTime());
 
         AddNewSchedule fragment = new AddNewSchedule();
-        fragment.setArguments(bundle);
+        fragment.setArguments(bundles);
         fragment.show(activity.getSupportFragmentManager(), AddNewSchedule.TAG);
     }
 

@@ -43,7 +43,7 @@ public class DataBaseHandlerExam extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_EXAM_TABLE);
-        Log.d("DataBaseHandlerExam", "Table created successfully"); //debugging
+        Log.d("DataBaseHandlerExam", "Table was created successfully slay"); //debugging
     }
 
     @Override
@@ -67,9 +67,9 @@ public class DataBaseHandlerExam extends SQLiteOpenHelper {
         long result = db.insert(EXAM_TABLE, null, cv);
 
         if (result != -1) {
-            Log.d("InsertExam", "Exam inserted sucessfully");
+            Log.d("InsertExam", "Exam was inserted sucessfully");
         } else {
-            Log.e("InsertExam", "Error inserting exam into the datbase"); //debugging
+            Log.e("InsertExam", "Theres an erro inserting exam into the datbase"); //debugging
         }
     }
 
@@ -93,7 +93,9 @@ public class DataBaseHandlerExam extends SQLiteOpenHelper {
                     examList.add(exam);
                 } while (cur.moveToNext());
             }
-        }  finally {
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
             if (cur != null && !cur.isClosed()) {
                 cur.close();
             }
