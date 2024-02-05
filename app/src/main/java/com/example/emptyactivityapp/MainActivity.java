@@ -30,14 +30,14 @@ public class MainActivity extends AppCompatActivity implements DialogCloseListen
     private List<ToDoModel> taskList;
     private DataBaseHandler db;
 
+    BottomNavigationView bottomNavigationView;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//<<<<<<< HEAD
-//<<<<<<< HEAD
         Objects.requireNonNull(getSupportActionBar()).hide();
         bottomNavigationView = findViewById(R.id.bottom_navigator);
         bottomNavigationView.setSelectedItemId(R.id.todolist);
@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements DialogCloseListen
         });
 
     }
-    BottomNavigationView bottomNavigationView;
+
     @Override
     public void handleDialogClose(DialogInterface dialog) {
         taskList = db.getAllTasks();

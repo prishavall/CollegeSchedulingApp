@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -12,11 +13,61 @@
         android:layout_height="wrap_content"
         android:textStyle="bold"
         android:text="Assignments"
-        android:textColor="@color/black"
+        android:textColor="@android:color/black"
         android:layout_marginStart="16dp"
-        android:layout_marginBottom="16dp"
         android:layout_marginTop="16dp"
-        android:textSize="32sp" />
+        android:textSize="32sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id = "@+id/assignmentsRecylerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:reverseLayout="true"
+        app:stackFromEnd="true"
+        app:layout_constraintTop_toBottomOf="@id/assignmentsText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:nestedScrollingEnabled="true" />
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id= "@+id/bydatefab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:padding="5dp"
+        android:text="Sort By Date"
+        app:backgroundTint="?attr/colorPrimary"
+        app:icon="@drawable/baseline_calendar_month_24"
+        app:layout_constraintBottom_toTopOf="@id/bycoursefab"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id= "@+id/bycoursefab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:padding="5dp"
+        android:text="Sort By Course"
+        app:backgroundTint="?attr/colorPrimary"
+        app:icon="@drawable/baseline_bookmark_24"
+        app:layout_constraintBottom_toTopOf="@id/assignmentfab"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id= "@+id/assignmentfab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:padding="5dp"
+        android:text="New Assignment"
+        app:backgroundTint="?attr/colorPrimary"
+        app:icon="@drawable/baseline_add_24"
+        app:layout_constraintBottom_toTopOf="@id/bottom_navigator"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -25,24 +76,8 @@
         app:itemTextColor="@drawable/selector"
         app:itemIconTint="@drawable/selector"
         app:menu="@menu/menu"
-        android:layout_alignParentBottom="true" />
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/assignmentsRecyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/assignmentsText"
-        app:layoutManager = "androidx.recyclerview.widget.LinearLayoutManager"
-        android:nestedScrollingEnabled="true" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/assignmentfab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_margin="50dp"
-        android:backgroundTint="@android:color/holo_green_dark"
-        android:src="@drawable/baseline_add_24"
-        android:contentDescription="Add item"/>
-
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,99 +6,116 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import com.example.emptyactivityapp.Model.AssignmentModel;
-import com.example.emptyactivityapp.Model.ToDoModel;
+import com.example.emptyactivityapp.Model.MiddlePage2Model;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class AssignmentDataBaseHandler extends SQLiteOpenHelper {
-    private static final int VERSION = 1;
-    private static final String NAME = "toDoListDatabase";
+    private static final int VERSION = 4;
+    private static final String NAME = "assignmentDatabase";
 
-    private static final String TODO_TABLE = "todo";
+    private static final String ASSIGNMENT_TABLE = "assignments";
     private static String ID = "id";
-    private static final String TASK  = "task";
-    private static final String TITLE = "task";
-    private static final String COURSE = "task";
-    private static final String DATE  = "task";
-    private static final String STATUS= "status";
-    private static final String CREATE_TODO_TABLE="CREATE TABLE "+ TODO_TABLE+" ( "+ID+
-            " INTEGER PRIMARY KEY AUTOINCREMENT, "
-            + TASK +" TEXT, "+STATUS+
-            " INTEGER)";
-    private SQLiteDatabase db;
+    private static final String TITLE = "title";
+    private static final String COURSE = "course";
+    private static final String DATE = "date";
+    private static final String STATUS = "status";
 
+    private static final String CREATE_ASSIGNMENT_TABLE = "CREATE TABLE " + ASSIGNMENT_TABLE + " ( " +
+            ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            TITLE + " TEXT, " +
+            COURSE + " TEXT, " +
+            DATE + " TEXT, " +
+            STATUS + " INTEGER)";
+
+    private SQLiteDatabase db;
 
     public AssignmentDataBaseHandler(Context context) {
         super(context, NAME, null, VERSION);
-
+        this.db = getWritableDatabase();
     }
+
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(CREATE_TODO_TABLE);
+        db.execSQL(CREATE_ASSIGNMENT_TABLE);
+        Log.d("DataBaseHandlerAssignment", "Table created successfully"); //debugging
     }
+
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + TODO_TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + ASSIGNMENT_TABLE);
         onCreate(db);
-
     }
+
     public void openDatabase() {
         db = this.getWritableDatabase();
+    }
+
+    public void insertAssignment(AssignmentModel assignment) {
+        ContentValues cv = new ContentValues();
+        cv.put(TITLE, assignment.getAssignmentName());
+        cv.put(COURSE, assignment.getCourse());
+        cv.put(DATE, assignment.getDate());
+        cv.put(STATUS, 0);
+
+        long result = db.insert(ASSIGNMENT_TABLE, null, cv);
+
+        if (result != -1) {
+            Log.d("InsertAssignment", "Exam inserted sucessfully");
+        } else {
+            Log.e("InsertAssignment", "Error inserting exam into the datbase"); //debugging
+        }
+
 
     }
-    public void insertTask(AssignmentModel task) {
-        ContentValues cv = new ContentValues();
-        cv.put(TASK, task.getAssignmentName());
-        cv.put(STATUS, 0);
-        db.insert(TODO_TABLE, null, cv);
-    }
+
     @SuppressLint("Range")
     public List<AssignmentModel> getAllAssignments() {
-        List<AssignmentModel> taskList = new ArrayList<>();
+        List<AssignmentModel> assignmentList = new ArrayList<>();
         Cursor cur = null;
-        db.beginTransaction();
-        try {
-            cur = db.query(TODO_TABLE, null, null, null, null, null, null);
-            if(cur != null) {
-                if(cur.moveToFirst()) {
-                    do {
-                        AssignmentModel task = new AssignmentModel();
-                        task.setId(cur.getInt(cur.getColumnIndex(ID)));
-                        task.setStatus(cur.getInt(cur.getColumnIndex(STATUS)));
-                        taskList.add(task);
-                    } while (cur.moveToNext());
 
-                }
+        try {
+            cur = db.query(ASSIGNMENT_TABLE, null, null, null, null, null, null);
+
+            if (cur != null && cur.moveToFirst()) {
+                do {
+                    AssignmentModel assignment = new AssignmentModel();
+                    assignment.setId(cur.getInt(cur.getColumnIndex(ID)));
+                    assignment.setAssignmentName(cur.getString(cur.getColumnIndex(TITLE)));
+                    assignment.setCourse(cur.getString(cur.getColumnIndex(COURSE)));
+                    assignment.setDate(cur.getString(cur.getColumnIndex(DATE)));
+                    assignment.setStatus(cur.getInt(cur.getColumnIndex(STATUS)));
+                    assignmentList.add(assignment);
+                } while (cur.moveToNext());
+            }
+        }  finally {
+            if (cur != null && !cur.isClosed()) {
+                cur.close();
             }
         }
-        finally {
-            db.endTransaction();
-            assert cur != null;
-            cur.close();
-        }
-        return taskList;
+
+        return assignmentList;
     }
 
 
-    public void updateStatus(int id, int status) {
+    public void updateAssignment(int id, AssignmentModel assignment) {
         ContentValues cv = new ContentValues();
-        cv.put(STATUS, status);
-        db.update(TODO_TABLE, cv, ID + "=?", new String[] {String.valueOf(ID)});
+        cv.put(TITLE, assignment.getAssignmentName());
+        cv.put(COURSE, assignment.getCourse());
+        cv.put(DATE, assignment.getDate());
+        db.update(ASSIGNMENT_TABLE, cv, ID + "=?", new String[]{String.valueOf(id)});
     }
-    public void updateTask(int id, String name, String course, String date) {
-        ContentValues cv = new ContentValues();
-        cv.put(TITLE, name);
-        cv.put(COURSE, name);
-        cv.put(DATE, date);
-        db.update(TODO_TABLE, cv, "id" + "+?", new String[] {String.valueOf(ID)});
 
+    public void deleteAssignment(int id) {
+        db.delete(ASSIGNMENT_TABLE, ID + "=?", new String[]{String.valueOf(id)});
     }
-    public void deleteTAsk(int id) {
-        db.delete(TODO_TABLE, ID + "=?", new String[]{String.valueOf(ID)});
-    }
+
+
 }
+
 
 
