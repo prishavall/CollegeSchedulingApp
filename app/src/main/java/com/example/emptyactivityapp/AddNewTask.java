@@ -81,15 +81,10 @@ public class AddNewTask extends BottomSheetDialogFragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(s.toString().equals("")){
-                    newTaskSaveButton.setEnabled(false);
-                    newTaskSaveButton.setTextColor(Color.GRAY);
-                }
-                else{
-                    newTaskSaveButton.setEnabled(true);
-                    newTaskSaveButton.setTextColor(ContextCompat.getColor(requireContext(), R.color.colorPrimaryDark));
-                }
+                newTaskSaveButton.setEnabled(!s.toString().isEmpty());
+                newTaskSaveButton.setTextColor(s.toString().isEmpty() ? Color.GRAY : ContextCompat.getColor(getContext(), R.color.colorPrimaryDark));
             }
+
 
             @Override
             public void afterTextChanged(Editable s) {
@@ -116,9 +111,14 @@ public class AddNewTask extends BottomSheetDialogFragment {
     }
 
     @Override
-    public void onDismiss(@NonNull DialogInterface dialog){
+    public void onDismiss(DialogInterface dialog) {
         Activity activity = getActivity();
-        if(activity instanceof DialogCloseListener)
-            ((DialogCloseListener)activity).handleDialogClose(dialog);
+        DialogCloseListener clistener = null;
+        if (activity instanceof DialogCloseListener) {
+            clistener = (DialogCloseListener) activity;
+        }
+        if (clistener != null) {
+            clistener.handleDialogClose(dialog);
+        }
     }
 }
