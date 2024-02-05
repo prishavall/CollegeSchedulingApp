@@ -61,12 +61,9 @@ public class MiddlePage2Model {
         this.status = status;
     }
 
-    // ... (other methods)
 
-    // Getter and Setter methods for examDate and examTime
 
     public String getFormattedDateTime() {
-        // Combine date and time into a formatted string
         SimpleDateFormat inputFormat = new SimpleDateFormat("MM-dd-yy hh:mm a", Locale.getDefault());
         SimpleDateFormat outputFormat = new SimpleDateFormat("MMMM d', 'yyyy hh:mm a", Locale.getDefault());
 
@@ -76,10 +73,10 @@ public class MiddlePage2Model {
             dateTime = inputFormat.parse(examDate + " " + examTime);
         } catch (ParseException e) {
             e.printStackTrace();
-            return ""; // Handle the exception as needed
+            return "";
         }
 
-        // Format the combined date and time
+
         return outputFormat.format(dateTime);
     }
 
