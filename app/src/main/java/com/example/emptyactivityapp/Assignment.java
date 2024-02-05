@@ -2,6 +2,7 @@ package com.example.emptyactivityapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager; import androidx.recyclerview.widget.RecyclerView;
 
@@ -68,14 +69,21 @@ public class Assignment extends AppCompatActivity implements DialogCloseListener
                     startActivity(new Intent(getApplicationContext(), Schedule.class));
                     overridePendingTransition(0, 0);
                     return true;
+
                 } else if (itemId == R.id.todolist) {
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
                     overridePendingTransition(0, 0);
                     return true;
+
                 } else if (itemId == R.id.assignments) {
                     startActivity(new Intent(getApplicationContext(), Assignment.class));
                     overridePendingTransition(0, 0);
                     return true;
+       } else if (itemId == R.id.todolist) {
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    overridePendingTransition(0, 0);
+                    return true;
+
                 } else if (itemId == R.id.exams) {
                     startActivity(new Intent(getApplicationContext(), MiddlePage2.class));
                     overridePendingTransition(0, 0);
@@ -84,6 +92,7 @@ public class Assignment extends AppCompatActivity implements DialogCloseListener
                 return false;
             }
         });
+
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
@@ -166,5 +175,6 @@ public class Assignment extends AppCompatActivity implements DialogCloseListener
         loadAssignments();
     }
 }
+
 
 

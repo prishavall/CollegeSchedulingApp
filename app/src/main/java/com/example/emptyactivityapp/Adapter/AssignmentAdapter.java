@@ -1,9 +1,11 @@
 package com.example.emptyactivityapp.Adapter;
+
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -74,9 +76,12 @@ public class AssignmentAdapter extends RecyclerView.Adapter<AssignmentAdapter.Vi
     }
 
 
+
+
     public Context getContext() {
         return activity;
     }
+
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         private TextView textAssignmentName;
@@ -117,3 +122,4 @@ public class AssignmentAdapter extends RecyclerView.Adapter<AssignmentAdapter.Vi
 
 
 }
+

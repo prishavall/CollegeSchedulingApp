@@ -78,9 +78,11 @@ public class MainActivity extends AppCompatActivity implements DialogCloseListen
 
 
 
+
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
+
 
 
 

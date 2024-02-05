@@ -6,15 +6,22 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
 import android.util.Log;
 
 import com.example.emptyactivityapp.Model.AssignmentModel;
 import com.example.emptyactivityapp.Model.MiddlePage2Model;
 
+
+import com.example.emptyactivityapp.Model.AssignmentModel;
+import com.example.emptyactivityapp.Model.ToDoModel;
+
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class AssignmentDataBaseHandler extends SQLiteOpenHelper {
+
     private static final int VERSION = 4;
     private static final String NAME = "assignmentDatabase";
 
