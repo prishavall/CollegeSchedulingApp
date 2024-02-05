@@ -105,7 +105,7 @@ public class Assignment extends AppCompatActivity implements DialogCloseListener
             getSupportActionBar().hide();
         }
         assignmentsList = new ArrayList<>();
-        assignmentsRecyclerView = findViewById(R.id.assignmentsRecylerView);
+        assignmentsRecyclerView = findViewById(R.id.assignmentsRecyclerView);
         assignmentsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
 
