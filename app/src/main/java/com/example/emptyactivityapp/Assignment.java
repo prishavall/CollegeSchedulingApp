@@ -21,7 +21,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-//<<<<<<< HEAD
 import java.security.cert.Extension;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
