@@ -3,77 +3,78 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
+    <!-- Schedule Name -->
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/examNameLayout"
+        android:id="@+id/scheduleNameLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/examNameText"
+            android:id="@+id/scheduleNameText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter exam name here"
+            android:hint="Enter class name here"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
-
+    <!-- Schedule Location -->
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/examLocationLayout"
+        android:id="@+id/scheduleLocationLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/examNameLayout"
+        android:layout_below="@+id/scheduleNameLayout"
         android:layout_marginTop="20dp">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/examLocationText"
+            android:id="@+id/scheduleLocationText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter exam location here"
+            android:hint="Enter class location here"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
-
+    <!-- Schedule Date -->
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/examDateLayout"
+        android:id="@+id/scheduleDateLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/examLocationLayout"
+        android:layout_below="@+id/scheduleLocationLayout"
         android:layout_marginTop="20dp">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/examDateText"
+            android:id="@+id/scheduleDateText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter exam date here"
+            android:hint="Enter class date here"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
-
+    <!-- Schedule Time -->
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/examTimeLayout"
+        android:id="@+id/scheduleTimeLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/examDateLayout"
+        android:layout_below="@+id/scheduleDateLayout"
         android:layout_marginTop="20dp">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/examTimeText"
+            android:id="@+id/scheduleTimeText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter exam time here"
+            android:hint="Enter class time here"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-        android:id="@+id/newExamButton"
+        android:id="@+id/newScheduleButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/examTimeLayout"
+        android:layout_below="@+id/scheduleTimeLayout"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="20dp"
         android:text="Save"

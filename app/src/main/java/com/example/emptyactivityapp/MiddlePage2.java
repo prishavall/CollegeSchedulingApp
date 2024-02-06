@@ -56,7 +56,11 @@ public class MiddlePage2 extends AppCompatActivity implements DialogCloseListene
                     finish();
                     return true;
                 } else if (itemId == R.id.assignments) {
+
                     startActivity(new Intent(getApplicationContext(), Assignment.class));
+
+                    startActivity(new Intent(getApplicationContext(), Assignments.class));
+
                     finish();
                     return true;
                 } else if (itemId == R.id.exams) {
@@ -94,4 +98,8 @@ public class MiddlePage2 extends AppCompatActivity implements DialogCloseListene
     public void handleDialogClose(DialogInterface dialog) {
         loadExams();
     }
+
 }
+
+}
+

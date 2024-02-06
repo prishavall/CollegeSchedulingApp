@@ -25,8 +25,10 @@ public class SplashActivity extends AppCompatActivity {
 
 
 
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
 
-        // Check if action bar is not null before hiding
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }

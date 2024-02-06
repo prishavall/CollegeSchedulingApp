@@ -9,6 +9,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -29,20 +30,21 @@ public class AddNewExam extends BottomSheetDialogFragment {
         return new AddNewExam();
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+
+    public void onCreate(Bundle savedInstance) { //done
+        super.onCreate(savedInstance);
         setStyle(STYLE_NORMAL, R.style.DialogStyle);
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) { //maybe donw
         View view = inflater.inflate(R.layout.new_exam, container, false);
-        getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+        Window newDialogWindow = getDialog().getWindow();
+        newDialogWindow.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         return view;
     }
 
-    @Override
+
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         newExamNameText = getView().findViewById(R.id.examNameText);
@@ -52,22 +54,23 @@ public class AddNewExam extends BottomSheetDialogFragment {
         newExamSaveButton = getView().findViewById(R.id.newExamButton);
 
         boolean isUpdate = false;
-        final Bundle bundle = getArguments();
-        if (bundle != null) {
+        final Bundle bundtcake = getArguments();
+        if (bundtcake != null) {
             isUpdate = true;
-            String examName = bundle.getString("examName");
-            String examLocation = bundle.getString("examLocation");
-            String examDate = bundle.getString("examDate");
-            String examTime = bundle.getString("examTime");
+            String examName = bundtcake.getString("examName");
+            String examDate = bundtcake.getString("examDate");
+            String examLocation = bundtcake.getString("examLocation");
+            String examTime = bundtcake.getString("examTime");
 
             newExamNameText.setText(examName);
-            newExamLocationText.setText(examLocation);
             newExamDateText.setText(examDate);
+            newExamLocationText.setText(examLocation);
             newExamTimeText.setText(examTime);
 
             if (examName != null && examName.length() > 0 && examLocation != null && examLocation.length() > 0 &&
                     examDate != null && examDate.length() > 0 && examTime != null && examTime.length() > 0) {
-                newExamSaveButton.setTextColor(ContextCompat.getColor(getContext(), R.color.colorPrimaryDark));
+                int color = ContextCompat.getColor(requireContext(), R.color.colorPrimaryDark);
+                newExamSaveButton.setTextColor(color);
             }
         }
 
@@ -79,7 +82,7 @@ public class AddNewExam extends BottomSheetDialogFragment {
         newExamDateText.addTextChangedListener(createTextWatcher());
         newExamTimeText.addTextChangedListener(createTextWatcher());
 
-        boolean finalIsUpdate = isUpdate;
+        boolean IsUpdatePart2 = isUpdate; //need to set again
 
         newExamSaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,13 +93,13 @@ public class AddNewExam extends BottomSheetDialogFragment {
                 String examTime = newExamTimeText.getText().toString();
 
                 MiddlePage2Model exam = null;
-                if (finalIsUpdate) {
-                    db.updateExam(bundle.getInt("id"), exam);
+                if (IsUpdatePart2) {
+                    db.updateExam(bundtcake.getInt("id"), exam);
                 } else {
                     exam = new MiddlePage2Model();
                     exam.setExamName(examName);
-                    exam.setExamLocation(examLocation);
                     exam.setExamDate(examDate);
+                    exam.setExamLocation(examLocation);
                     exam.setExamTime(examTime);
                     db.insertExam(exam);
                 }
@@ -105,34 +108,30 @@ public class AddNewExam extends BottomSheetDialogFragment {
         });
     }
 
-    private TextWatcher createTextWatcher() {
+    public void onDismiss(DialogInterface dialog) { //done
+        Activity activity = getActivity();
+        DialogCloseListener clistener = null;
+        if (activity instanceof DialogCloseListener) {
+            clistener = (DialogCloseListener) activity;
+        }
+        if (clistener != null) {
+            clistener.handleDialogClose(dialog);
+        }
+    }
+    private TextWatcher createTextWatcher() { //done
         return new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
 
-            @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s.toString().equals("")) {
-                    newExamSaveButton.setEnabled(false);
-                    newExamSaveButton.setTextColor(Color.GRAY);
-                } else {
-                    newExamSaveButton.setEnabled(true);
-                    newExamSaveButton.setTextColor(ContextCompat.getColor(getContext(), R.color.colorPrimaryDark));
-                }
+                newExamSaveButton.setEnabled(!s.toString().isEmpty());
+                newExamSaveButton.setTextColor(s.toString().isEmpty() ? Color.GRAY : ContextCompat.getColor(getContext(), R.color.colorPrimaryDark));
             }
 
-            @Override
             public void afterTextChanged(Editable s) {
+            }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
         };
     }
 
-    @Override
-    public void onDismiss(DialogInterface dialog) {
-        Activity activity = getActivity();
-        if (activity instanceof DialogCloseListener) {
-            ((DialogCloseListener) activity).handleDialogClose(dialog);
-        }
-    }
+
 }

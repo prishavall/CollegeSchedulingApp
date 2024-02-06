@@ -18,19 +18,19 @@
         android:padding="16dp">
 
 
-
+        <!-- Icon ImageView -->
         <ImageView
             android:id="@+id/iconImageView"
             android:layout_width="36dp"
             android:layout_height="36dp"
-            android:src="@drawable/ic_exams"
+            android:src="@drawable/baseline_calendar_month_24"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_marginEnd="8dp"/>
 
-
+        <!-- Text Views -->
         <TextView
-            android:id="@+id/textExamName"
+            android:id="@+id/textScheduleName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_toEndOf="@id/iconImageView"
@@ -38,18 +38,18 @@
             android:textStyle="bold"/>
 
         <TextView
-            android:id="@+id/textExamLocation"
+            android:id="@+id/textScheduleLocation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/textExamName"
+            android:layout_below="@id/textScheduleName"
             android:layout_toEndOf="@id/iconImageView"
             android:textSize="14sp"/>
 
         <TextView
-            android:id="@+id/textExamDateTime"
+            android:id="@+id/textScheduleDateTime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/textExamLocation"
+            android:layout_below="@id/textScheduleLocation"
             android:layout_toEndOf="@id/iconImageView"
             android:textSize="14sp"/>
     </RelativeLayout>

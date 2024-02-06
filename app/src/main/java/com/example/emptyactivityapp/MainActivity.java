@@ -16,11 +16,11 @@ import com.example.emptyactivityapp.Utils.DataBaseHandler;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-//<<<<<<< HEAD
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List; import java.util.Objects;
-//=======
+
 
 
 public class MainActivity extends AppCompatActivity implements DialogCloseListener{
@@ -33,31 +33,36 @@ public class MainActivity extends AppCompatActivity implements DialogCloseListen
     BottomNavigationView bottomNavigationView;
 
 
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         Objects.requireNonNull(getSupportActionBar()).hide();
         bottomNavigationView = findViewById(R.id.bottom_navigator);
         bottomNavigationView.setSelectedItemId(R.id.todolist);
         bottomNavigationView.setOnItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
+
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int itemId = item.getItemId();
                 if (itemId == R.id.simpleschedule) {
                     startActivity(new Intent(getApplicationContext(), Schedule.class));
-                    overridePendingTransition(0, 0);
                     return true;
                 } else if (itemId == R.id.todolist) {
+                    if (!MainActivity.this.getClass().equals(MainActivity.class)) {
+                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    }
                     return true;
                 } else if (itemId == R.id.assignments) {
+
                     startActivity(new Intent(getApplicationContext(), Assignment.class));
                     overridePendingTransition(0, 0);
+
+                    startActivity(new Intent(getApplicationContext(), Assignments.class));
+
+
                     return true;
                 } else if (itemId == R.id.exams) {
                     startActivity(new Intent(getApplicationContext(), MiddlePage2.class));
-                    overridePendingTransition(0, 0);
                     return true;
                 }
                 return false;
@@ -72,16 +77,18 @@ public class MainActivity extends AppCompatActivity implements DialogCloseListen
         db.openDatabase();
 
 
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().hide();
-        }
-
-
-
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
+
+
+
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
+
 
 
 
@@ -103,7 +110,7 @@ public class MainActivity extends AppCompatActivity implements DialogCloseListen
         Collections.reverse(taskList);
         tasksAdapter.setTasks(taskList);
         fab.setOnClickListener(new View.OnClickListener() {
-            @Override
+
             public void onClick(View v) {
                 AddNewTask.newInstance().show(getSupportFragmentManager(), AddNewTask.TAG);
             }
@@ -111,7 +118,12 @@ public class MainActivity extends AppCompatActivity implements DialogCloseListen
 
     }
 
+
     @Override
+
+    BottomNavigationView bottomNavigationView;
+
+
     public void handleDialogClose(DialogInterface dialog) {
         taskList = db.getAllTasks();
         // might modify when sorting dates
