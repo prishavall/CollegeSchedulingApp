@@ -30,6 +30,8 @@ public class MainActivity extends AppCompatActivity implements DialogCloseListen
     private List<ToDoModel> taskList;
     private DataBaseHandler db;
 
+    BottomNavigationView bottomNavigationView;
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,7 +53,12 @@ public class MainActivity extends AppCompatActivity implements DialogCloseListen
                     }
                     return true;
                 } else if (itemId == R.id.assignments) {
+
+                    startActivity(new Intent(getApplicationContext(), Assignment.class));
+                    overridePendingTransition(0, 0);
+
                     startActivity(new Intent(getApplicationContext(), Assignments.class));
+
 
                     return true;
                 } else if (itemId == R.id.exams) {
@@ -69,9 +76,27 @@ public class MainActivity extends AppCompatActivity implements DialogCloseListen
         db = new DataBaseHandler(this);
         db.openDatabase();
 
+
+
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
+
+
+
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
+
+
+
+
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
+
 
         taskList = new ArrayList<>();
         tasksRecyclerView = findViewById(R.id.tasksRecyclerView);
@@ -92,7 +117,12 @@ public class MainActivity extends AppCompatActivity implements DialogCloseListen
         });
 
     }
+
+
+    @Override
+
     BottomNavigationView bottomNavigationView;
+
 
     public void handleDialogClose(DialogInterface dialog) {
         taskList = db.getAllTasks();

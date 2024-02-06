@@ -12,12 +12,13 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.emptyactivityapp.Adapter.AssignmentAdapter;
 import com.example.emptyactivityapp.Adapter.MiddlePage2Adapter;
 
-public class RecyclerItemTouchHelperExams extends ItemTouchHelper.SimpleCallback {
-    private MiddlePage2Adapter adapter;
+public class RecyclerItemTouchHelperAssignments extends ItemTouchHelper.SimpleCallback {
+    private AssignmentAdapter adapter;
 
-    public RecyclerItemTouchHelperExams(MiddlePage2Adapter adapter) {
+    public RecyclerItemTouchHelperAssignments(AssignmentAdapter adapter) {
         super(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT);
         this.adapter = adapter;
     }
@@ -51,6 +52,7 @@ public class RecyclerItemTouchHelperExams extends ItemTouchHelper.SimpleCallback
             dialog.show();
         } else {
             adapter.editItem(position);
+            adapter.notifyItemChanged(viewHolder.getAdapterPosition());
         }
     }
 
@@ -62,10 +64,10 @@ public class RecyclerItemTouchHelperExams extends ItemTouchHelper.SimpleCallback
         View itemView = viewHolder.itemView;
         int backgroundCornerOffset = 20;
         if (dX > 0) {
-            icon = ContextCompat.getDrawable(adapter.getContext(), R.drawable.baseline_add_24);
+            icon = ContextCompat.getDrawable(adapter.getContext(), R.drawable.baseline_edit_24);
             background = new ColorDrawable(ContextCompat.getColor(adapter.getContext(), R.color.colorPrimaryDark));
         } else {
-            icon = ContextCompat.getDrawable(adapter.getContext(), R.drawable.baseline_auto_delete);
+            icon = ContextCompat.getDrawable(adapter.getContext(), R.drawable.baseline_close_24);
             background = new ColorDrawable(Color.RED);
 
         }

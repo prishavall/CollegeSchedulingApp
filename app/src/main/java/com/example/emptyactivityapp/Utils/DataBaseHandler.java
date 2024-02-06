@@ -8,7 +8,11 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+
+import com.example.emptyactivityapp.Model.AssignmentModel;
+
 import com.example.emptyactivityapp.Model.MiddlePage2Model;
+
 import com.example.emptyactivityapp.Model.ToDoModel;
 
 import java.util.ArrayList;
@@ -79,7 +83,11 @@ public class DataBaseHandler extends SQLiteOpenHelper {
 
 
 
+    public void updateStatus(int id, int status) {
+
+
     public void updateTask(int id, ToDoModel tasky) {
+
         ContentValues cv = new ContentValues();
         cv.put(TASK, tasky.getTask());
         cv.put(CATEGORY, tasky.getCategory());

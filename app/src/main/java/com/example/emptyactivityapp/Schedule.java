@@ -28,6 +28,30 @@ public class Schedule extends AppCompatActivity implements DialogCloseListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schedule);
 
+        bottomNavigationView = findViewById(R.id.bottom_navigator);
+        bottomNavigationView.setSelectedItemId(R.id.simpleschedule);
+        bottomNavigationView.setOnItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int itemId = item.getItemId();
+                if (itemId == R.id.todolist) {
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    overridePendingTransition(0, 0);
+                    return true;
+                } else if (itemId == R.id.simpleschedule ) {
+                    return true;
+                } else if (itemId == R.id.assignments) {
+                    startActivity(new Intent(getApplicationContext(), Assignment.class));
+                    overridePendingTransition(0, 0);
+                    return true;
+                } else if (itemId == R.id.exams) {
+                    startActivity(new Intent(getApplicationContext(), MiddlePage2.class));
+                    overridePendingTransition(0, 0);
+                    return true;
+                }
+                return false;
+
+
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
@@ -43,6 +67,7 @@ public class Schedule extends AppCompatActivity implements DialogCloseListener {
         efab.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 AddNewSchedule.newInstance().show(getSupportFragmentManager(), AddNewSchedule.TAG);
+
             }
         });
         loadSchedules();
